@@ -1,9 +1,9 @@
 from fastapi import FastAPI
-from app.routers import stats 
+from app.routers import users
 
 app = FastAPI(title="DevWrapped API")
 
-app.include_router(stats.router)
+app.include_router(users.router)
 
 @app.get("/health")
 def  health() -> dict:
