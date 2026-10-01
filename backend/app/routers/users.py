@@ -1,5 +1,5 @@
 from fastapi import APIRouter, HTTPException
-from app.services.github import get_github_user , GitHubUserNotFoundError 
+from app.services.github import get_github_user , GitHubUserNotFoundError , GitHubUnavailableError
 
 router = APIRouter()
 
@@ -10,6 +10,8 @@ def get_user(username: str) -> dict:
 
     except GitHubUserNotFoundError:
         raise HTTPException(status_code=404, detail="utilisateur introuvable")
+    except GitHubUnavailableError:
+        raise HTTPException(status_code=502, detail="GitHub est indisponible, réessaie plus tard")
     
     return {
             "login": user["login"],
