@@ -86,7 +86,7 @@ devwrapped/
 - [x] Récupération d'un profil via l'API publique GitHub
 - [x] Architecture en couches (routers / services)
 - [x] Gestion des erreurs (404 utilisateur introuvable, 502 GitHub indisponible)
-- [ ] Schémas de réponse validés avec Pydantic
+- [x] Schémas de réponse validés avec Pydantic
 - [ ] Statistiques : langages principaux, étoiles, ancienneté du compte
 - [ ] Interface React + TypeScript : saisie du pseudo et affichage de la carte
 
