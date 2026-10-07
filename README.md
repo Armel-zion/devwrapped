@@ -13,7 +13,7 @@ Projet personnel d'apprentissage réalisé pendant mon Bachelor 2 Informatique �
 ## Fonctionnalités
 
 - `GET /health` : vérifie que l'API est en ligne.
-- `GET /users/{username}` : renvoie les informations principales d'un profil GitHub (login, nom, nombre de dépôts publics, followers, date de création du compte).
+- `GET /users/{username}` : renvoie les informations principales d'un profil GitHub (login, nom, nombre de dépôts publics, followers, date de création du compte). La réponse est validée et filtrée par un schéma Pydantic : seuls ces 5 champs sont renvoyés, et un compte sans nom renvoie `"name": null`./
 - Gestion des erreurs :
   - `404` si l'utilisateur GitHub n'existe pas ;
   - `502` si l'API GitHub ne répond pas correctement (limite de requêtes, panne).
@@ -74,6 +74,8 @@ devwrapped/
     │   ├── main.py            # Point d'entrée : crée l'app FastAPI et branche les routers
     │   ├── routers/
     │   │   └── users.py       # Routes HTTP /users/... (reçoit les requêtes, renvoie les réponses)
+    │   ├── schemas/
+    │   │   └── user.py        # Contrats de réponse Pydantic (GitHubUserResponse)
     │   └── services/
     │       └── github.py      # Logique métier : appels à l'API GitHub, exceptions
     └── requirements.txt       # Dépendances Python
