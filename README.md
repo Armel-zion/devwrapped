@@ -6,14 +6,15 @@
 
 DevWrapped analyse l'activité publique d'un développeur sur GitHub et la résume sous forme de carte visuelle, une « carte d'identité » du développeur, à partager sur LinkedIn ou dans un portfolio.
 
-Le projet est en cours de développement (v0.1). Pour l'instant, l'API récupère et nettoie les informations de base d'un profil GitHub. L'interface React et la carte sont les prochaines étapes.
+Le projet est en cours de développement (v0.1). Pour l'instant, l'API récupère et nettoie les informations de base d'un profil GitHub, et calcule ses statistiques (langages, étoiles). L'interface React et la carte sont les prochaines étapes.
 
 Projet personnel d'apprentissage réalisé pendant mon Bachelor 2 Informatique à Ynov Campus.
 
 ## Fonctionnalités
 
 - `GET /health` : vérifie que l'API est en ligne.
-- `GET /users/{username}` : renvoie les informations principales d'un profil GitHub (login, nom, nombre de dépôts publics, followers, date de création du compte). La réponse est validée et filtrée par un schéma Pydantic : seuls ces 5 champs sont renvoyés, et un compte sans nom renvoie `"name": null`./
+- `GET /users/{username}` : renvoie les informations principales d'un profil GitHub (login, nom, nombre de dépôts publics, followers, date de création du compte). La réponse est validée et filtrée par un schéma Pydantic : seuls ces 5 champs sont renvoyés, et un compte sans nom renvoie `"name": null`.
+- `GET /users/{username}/stats` : renvoie les statistiques d'un développeur calculées à partir de ses dépôts publics (100 au maximum) : nombre de dépôts (sans les forks), top 3 des langages et total des étoiles. À égalité de dépôts, le langage utilisé le plus récemment passe devant (voir [ADR 0001](docs/adr/0001-classement-des-langages.md)).
 - Gestion des erreurs :
   - `404` si l'utilisateur GitHub n'existe pas ;
   - `502` si l'API GitHub ne répond pas correctement (limite de requêtes, panne).
@@ -75,10 +76,14 @@ devwrapped/
     │   ├── routers/
     │   │   └── users.py       # Routes HTTP /users/... (reçoit les requêtes, renvoie les réponses)
     │   ├── schemas/
-    │   │   └── user.py        # Contrats de réponse Pydantic (GitHubUserResponse)
+    │   │   ├── user.py        # Contrat de réponse du profil (GitHubUserResponse)
+    │   │   └── stats.py       # Contrat de réponse des statistiques (GitHubStatsResponse)
     │   └── services/
-    │       └── github.py      # Logique métier : appels à l'API GitHub, exceptions
+    │       ├── github.py      # Appels à l'API GitHub (profil, dépôts), exceptions
+    │       └── stats.py       # Calcul des statistiques, sans accès au réseau
     └── requirements.txt       # Dépendances Python
+docs/
+└── adr/                       # Décisions d'architecture (ADR)
 ```
 
 ## Feuille de route
@@ -89,7 +94,7 @@ devwrapped/
 - [x] Architecture en couches (routers / services)
 - [x] Gestion des erreurs (404 utilisateur introuvable, 502 GitHub indisponible)
 - [x] Schémas de réponse validés avec Pydantic
-- [ ] Statistiques : langages principaux, étoiles, ancienneté du compte
+- [x] Statistiques : langages principaux et étoiles (l'ancienneté sera calculée côté React, voir [ADR 0002](docs/adr/0002-anciennete-cote-react.md))
 - [ ] Interface React + TypeScript : saisie du pseudo et affichage de la carte
 
 ### Versions suivantes
