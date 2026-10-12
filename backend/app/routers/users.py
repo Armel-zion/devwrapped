@@ -12,7 +12,7 @@ def get_user(username: str) -> GitHubUserResponse:
         user = get_github_user(username)
 
     except GitHubUserNotFoundError:
-        raise HTTPException(status_code=404, detail="Utilisateur  introuvable")
+        raise HTTPException(status_code=404, detail="Utilisateur introuvable")
     except GitHubUnavailableError:
         raise HTTPException(status_code=502, detail="GitHub est indisponible, réessaie plus tard")
     
@@ -23,7 +23,7 @@ def get_user_stats(username: str) -> GitHubStatsResponse:
     try:
         depots =  get_github_repos(username)
     except GitHubUserNotFoundError:
-        raise HTTPException(status_code=404, detail="Utilisateur  introuvable")
+        raise HTTPException(status_code=404, detail="Utilisateur introuvable")
     except GitHubUnavailableError:
         raise HTTPException(status_code=502, detail="GitHub est indisponible, réessaie plus tard")
     return calculer_stats(depots)
