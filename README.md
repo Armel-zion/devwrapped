@@ -1,12 +1,26 @@
 # DevWrapped
 
-> Transforme un profil GitHub en carte de développeur stylée et partageable.
+> La carte d'identité d'un développeur, générée depuis son GitHub : ce qu'il code, avec quoi, depuis quand. À partager sur LinkedIn.
 
-## Description
+## Pourquoi DevWrapped ?
 
-DevWrapped analyse l'activité publique d'un développeur sur GitHub et la résume sous forme de carte visuelle, une « carte d'identité » du développeur, à partager sur LinkedIn ou dans un portfolio.
+Un recruteur n'a pas le temps de fouiller le GitHub d'un candidat dépôt par dépôt. DevWrapped lit le profil public d'un développeur et le résume en une carte visuelle, une « carte d'identité » du développeur, à partager sur LinkedIn ou dans un portfolio.
 
-Le projet est en cours de développement (v0.1). Pour l'instant, l'API récupère et nettoie les informations de base d'un profil GitHub, et calcule ses statistiques (langages, étoiles). L'interface React et la carte sont les prochaines étapes.
+La carte répond en un coup d'œil aux questions qu'on se pose sur un développeur :
+
+| Question | Réponse de DevWrapped | État (v0.1) |
+|:--|:--|:--|
+| Il code en quoi ? | le top 3 de ses langages | ✅ API prête |
+| Il a combien de projets ? | le nombre de ses dépôts (sans les forks) | ✅ API prête |
+| Son travail intéresse-t-il les autres ? | le total des étoiles reçues | ✅ API prête |
+| Depuis quand est-il sur GitHub ? | l'ancienneté du compte (« depuis 3 ans ») | 🟡 donnée prête, affichage côté React |
+| Peut-on voir tout ça en un coup d'œil ? | la carte à partager | ⬜ interface React en cours |
+
+DevWrapped n'utilise que les **données publiques** de GitHub : il ne montre que ce que le développeur a lui-même choisi de rendre public.
+
+## État du projet
+
+Version **v0.1 en cours** : l'API FastAPI est prête (profil et statistiques). L'interface React + TypeScript, qui affichera la carte, est la prochaine étape.
 
 Projet personnel d'apprentissage réalisé pendant mon Bachelor 2 Informatique à Ynov Campus.
 
