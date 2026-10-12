@@ -13,3 +13,13 @@ def get_github_user(username: str) -> dict:
     if response.status_code != 200:
         raise GitHubUnavailableError("GitHub est indisponible, réessaie plus tard")
     return response.json()
+
+
+def get_github_repos(username: str) -> list[dict]:
+    response = httpx.get(f"https://api.github.com/users/{username}/repos", params={"per_page": 100})
+    if response.status_code == 404:
+        raise GitHubUserNotFoundError("Utilisateur GitHub introuvable")
+    if  response.status_code != 200:
+        raise GitHubUnavailableError("GitHub est indisponible, réessaie plus tard")
+    return response.json()
+
