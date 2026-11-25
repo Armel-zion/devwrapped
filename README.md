@@ -119,3 +119,9 @@ docs/
 - [ ] Conteneurisation Docker
 - [ ] Intégration et déploiement continus (GitHub Actions)
 - [ ] Mise en ligne
+
+## Licence
+
+© 2026 Armel Goy Gloux Zion — tous droits réservés.
+
+Le code est public pour être consulté (portfolio). Il n'est pas placé sous licence libre pour l'instant : sa copie, sa modification et sa réutilisation ne sont pas autorisées sans mon accord. Pour toute demande, contactez-moi via [mon profil GitHub](https://github.com/Armel-zion).
